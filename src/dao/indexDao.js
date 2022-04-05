@@ -25,9 +25,9 @@ exports.selectStudents = async ()=>{
   try {
     const connection = await pool.getConnection(async (conn) => conn);
     try {
-      const selectUserQuery = "SELECT * FROM Students;";
+      const selectStudentsQuery = "SELECT * FROM Students;";
 
-      const [row] = await connection.query(selectUserQuery);
+      const [row] = await connection.query(selectStudentsQuery);
       connection.release();
       return row;
     } catch (error) {
@@ -37,6 +37,26 @@ exports.selectStudents = async ()=>{
     }
   } catch (error) {
     console.error(` ##### getStudentsRows DB error #####`);
+    return false;
+  }
+};
+
+exports.selectLectures = async ()=>{
+  try {
+    const connection = await pool.getConnection(async (conn) => conn);
+    try {
+      const selectLecturesQuery = "SELECT * FROM Lectures;";
+
+      const [row] = await connection.query(selectLecturesQuery);
+      connection.release();
+      return row;
+    } catch (error) {
+      console.error(` ##### getLecturesRows Query error ##### `);
+      connection.release();
+      return false;
+    }
+  } catch (error) {
+    console.error(` ##### getLecturesRows DB error #####`);
     return false;
   }
 };

@@ -21,3 +21,13 @@ exports.readStudents = async (req, res)=>{
     message: "학생 목록 조회 성공!",
   });
 };
+
+exports.readLectures = async (req, res)=>{
+  const selectLecturesRows = await indexDao.selectLectures();
+  return res.send({
+    result: selectLecturesRows,
+    isSuccess: false,
+    code: 200,
+    message: "강의 목록 조회 성공!",
+  });
+};
